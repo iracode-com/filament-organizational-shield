@@ -1,0 +1,24 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+@import '../../font.css';
+
+@config 'tailwind.config.js';
+
+body {
+    font-family: Inter, 'YekanBakhFaNumRegular', serif;
+}
+
+.fi-btn {
+    padding: .375rem .25rem;
+}
+
+.fi-btn-label {
+    padding-left: .5rem;
+    padding-right: .5rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+}
+
+.fi-modal-close-overlay{
+    @apply backdrop-blur-sm;
+}
