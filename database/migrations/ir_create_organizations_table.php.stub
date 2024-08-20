@@ -1,0 +1,81 @@
+<?php
+
+use IracodeCom\FilamentOrganizationalShield\Models\Organization;
+use IracodeCom\FilamentOrganizationalShield\Models\Position;
+use IracodeCom\FilamentOrganizationalShield\Models\User;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('organizations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('copyright')->default('copyright');
+            $table->string('slug')->unique();
+            $table->text('logo')->nullable();
+            $table->text('icon')->nullable();
+            $table->integer('tel')->nullable();
+            $table->integer('fax')->nullable();
+            $table->string('industry')->nullable();
+            $table->integer('personnel_count')->nullable()->default(0);
+            $table->string('address')->nullable();
+            $table->integer('national_id')->nullable()->default(0);
+            $table->integer('economy_code')->nullable()->default(0);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('organization_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Organization::class)->constrained('organizations')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('organizational_structures', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Organization::class)->constrained('organizations')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('parent_id')->default(-1);
+            $table->integer('order')->default(0)->index();
+            $table->string('title');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('positions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->boolean("status")->default(true);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('user_organizational_information', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();;
+            $table->foreignId('structure_id')->nullable()->constrained('organizational_structures')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(Position::class)->nullable()->constrained('positions')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('organizational_structures');
+        Schema::dropIfExists('organization_user');
+        Schema::dropIfExists('user_organizational_information');
+        Schema::dropIfExists('positions');
+    }
+};

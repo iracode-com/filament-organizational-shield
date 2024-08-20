@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('email')->nullable()->change();
+            $table->string('national_code')->nullable();
+            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->text('avatar_url')->nullable();
+            $table->string('ip')->nullable();
+            $table->string('agent')->nullable();
+            $table->dateTime('last_login')->nullable();
+            $table->timestamp('banned_until')->nullable();
+            $table->boolean('must_password_reset')->default(false);
+            $table->boolean('can_password_reset')->default(false);
+            $table->boolean('password_never_expires')->default(true);
+            $table->boolean("status")->default(true);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('email')->unique()->change();
+            $table->dropColumn('national_code');
+            $table->dropColumn('role');
+            $table->dropColumn('avatar_url');
+            $table->dropColumn('ip');
+            $table->dropColumn('agent');
+            $table->dropColumn('last_login');
+            $table->dropColumn('banned_until');
+            $table->dropColumn('must_password_reset');
+            $table->dropColumn('can_password_reset');
+            $table->dropColumn('password_never_expires');
+            $table->dropColumn('status');
+        });
+    }
+};

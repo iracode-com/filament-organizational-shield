@@ -1,0 +1,52 @@
+{
+  "name": "iracode-com/filament-organizational-shield",
+  "description": "Filament organizational shield for filament shield package",
+  "type": "filament-plugin",
+  "version": "1.0.1",
+  "keywords": [
+    "laravel",
+    "filament",
+    "filament-shield",
+    "permission",
+    "permissions",
+    "roles",
+    "acl",
+    "rbac",
+    "security"
+  ],
+  "require": {
+    "php": "^8.1",
+    "bezhansalleh/filament-shield": "^3.2",
+    "filament/filament": "^3.2",
+    "spatie/laravel-package-tools": "^1.16",
+    "spatie/laravel-permission": "^6.9",
+    "codewithdennis/filament-select-tree": "^3.1",
+    "codewithdennis/filament-simple-alert": "^3.0",
+    "hekmatinasser/verta": "^8.4",
+    "jeffgreco13/filament-breezy": "^2.4",
+    "solution-forest/filament-tree": "^2.0",
+    "ariaieboy/filament-jalali-datetime": "^1.4",
+    "ariaieboy/filament-jalali-datetimepicker": "^3.0"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "IracodeCom\\FilamentOrganizationalShield\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "IracodeCom\\FilamentOrganizationalShield\\FilamentOrganizationalShieldServiceProvider"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "ardavanshamroshan",
+      "email": "ardavanshamroshan@yahoo.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
