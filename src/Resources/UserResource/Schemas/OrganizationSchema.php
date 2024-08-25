@@ -23,7 +23,7 @@ class OrganizationSchema
                             ->label(__('Organizational structure'))
                             ->reactive()
                             ->inlineLabel()
-                            ->relationship('structure', 'name', 'parent_id')
+                            ->relationship('structure', 'title', 'parent_id')
                             ->parentNullValue(-1)
                             ->withCount()
                             ->searchable()
@@ -39,7 +39,7 @@ class OrganizationSchema
                                     ->fillForm(function (Forms\Get $get) {
                                         $structure = Structure::query()->findOrFail($get('structure_id'));
                                         return [
-                                            'name'      => $structure->name,
+                                            'title'      => $structure->title,
                                             'parent_id' => $structure->parent_id,
                                         ];
                                     })

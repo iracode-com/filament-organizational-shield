@@ -4,7 +4,7 @@ namespace IracodeCom\FilamentOrganizationalShield\Resources;
 
 use IracodeCom\FilamentOrganizationalShield\Enums\UserRole;
 use IracodeCom\FilamentOrganizationalShield\Resources\UserResource\Pages;
-use IracodeCom\FilamentOrganizationalShield\Models\User;
+use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

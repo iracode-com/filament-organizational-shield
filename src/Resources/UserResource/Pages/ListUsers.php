@@ -3,7 +3,7 @@
 namespace IracodeCom\FilamentOrganizationalShield\Resources\UserResource\Pages;
 
 use IracodeCom\FilamentOrganizationalShield\Resources\UserResource;
-use IracodeCom\FilamentOrganizationalShield\Models\User;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;

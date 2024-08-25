@@ -3,7 +3,7 @@
 namespace IracodeCom\FilamentOrganizationalShield\Resources\UserResource\Schemas;
 
 use IracodeCom\FilamentOrganizationalShield\Enums\UserRole;
-use IracodeCom\FilamentOrganizationalShield\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
 use Filament\Forms;
@@ -28,7 +28,7 @@ class UserManagementSchema
                         Forms\Components\TextInput::make('national_code')->required()->inlineLabel()->numeric(),
                         Forms\Components\TextInput::make('email')->inlineLabel()->nullable()->email()->unique('users', 'email', ignoreRecord: true),
                         Forms\Components\Placeholder::make('password')->inlineLabel()->content(new HtmlString('<a href="' . MyProfilePage::getUrl() . '" class="text-primary-600 dark:text-primary-400">تغییر کلمه عبور</a>'))
-                            ->visible(fn(string $operation, ?User $record) => ($operation == 'edit' && $record->id == auth()->id())),
+                            ->visible(fn(string $operation, ?User $record) => ($operation == 'edit')),
                         Forms\Components\Radio::make('role')->options(UserRole::class)->inlineLabel()->default(UserRole::USER),
                     ]),
                     Forms\Components\Group::make([

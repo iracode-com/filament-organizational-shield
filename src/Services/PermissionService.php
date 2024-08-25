@@ -2,7 +2,7 @@
 
 namespace IracodeCom\FilamentOrganizationalShield\Services;
 
-use IracodeCom\FilamentOrganizationalShield\Models\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class PermissionService

@@ -2,7 +2,6 @@
 
 namespace IracodeCom\FilamentOrganizationalShield\Commands;
 
-use BezhanSalleh\FilamentShield\Commands\Concerns;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -13,9 +12,9 @@ class MakeIracodeShieldPublishCommand extends Command
 {
     use Concerns\CanManipulateFiles;
 
-    public $signature = 'iracode-shield:publish';
+    public $signature = 'iracode-shield:install';
 
-    public $description = "Publish filament shield's Resource.";
+    public $description = "Install filament shield's Resource.";
 
     public function handle(Filesystem $filesystem): int
     {
@@ -69,25 +68,35 @@ class MakeIracodeShieldPublishCommand extends Command
         $this->components->info("Shield's Resource have been published successfully!");
 
         if ($this->confirm('Do you want to publish migrations?', true)) {
-            $this->callSilent('vendor:publish', [
-                '--tag' => 'filament-organizational-shield-migrations',
-            ]);
+            $this->callSilent('vendor:publish', ['--tag' => 'filament-organizational-shield-migrations']);
             $this->info("Migrations have been published successfully!");
         }
 
         if ($this->confirm('Do you want to publish configs?', true)) {
-            $this->callSilent('vendor:publish', [
-                '--tag' => 'filament-organizational-shield-config',
-            ]);
+            $this->callSilent('vendor:publish', ['--tag' => 'filament-organizational-shield-config']);
             $this->info("Config file has been published successfully!");
         }
         if ($this->confirm('Do you want to publish translations?', true)) {
-            $this->callSilent('vendor:publish', [
-                '--tag' => 'filament-organizational-shield-translations',
-            ]);
+            $this->callSilent('vendor:publish', ['--tag' => 'filament-organizational-shield-translations']);
             $this->info("Translation file has been published successfully!");
         }
 
+        // Shield seeder
+        $shieldSeederPath       = database_path('seeders/ShieldSeeder.php');
+        $userSeederPath         = database_path('seeders/UserSeeder.php');
+        $organizationSeederPath = database_path('seeders/OrganizationSeeder.php');
+        if ($this->checkForCollision(paths: [$shieldSeederPath, $userSeederPath, $organizationSeederPath])) {
+            $confirmed = confirm('ShieldSeeder already exists. Overwrite?');
+            if (! $confirmed) {
+                return self::INVALID;
+            }
+        }
+        $this->copyStubToApp(stub: 'ShieldSeeder', targetPath: $shieldSeederPath);
+        $this->copyStubToApp(stub: 'UserSeeder', targetPath: $userSeederPath);
+        $this->copyStubToApp(stub: 'OrganizationSeeder', targetPath: $organizationSeederPath);
+
+
+        $this->components->info('ShieldSeeder, UserSeeder, OrganizationSeeder generated successfully.');
         return self::SUCCESS;
     }
 }

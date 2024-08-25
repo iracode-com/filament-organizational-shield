@@ -2,7 +2,7 @@
 
 namespace IracodeCom\FilamentOrganizationalShield\Observers;
 
-use IracodeCom\FilamentOrganizationalShield\Models\User;
+use App\Models\User;
 
 class UserObserver
 {

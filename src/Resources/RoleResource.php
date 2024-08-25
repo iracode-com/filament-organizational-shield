@@ -3,7 +3,7 @@
 namespace IracodeCom\FilamentOrganizationalShield\Resources;
 
 use IracodeCom\FilamentOrganizationalShield\Resources\RoleResource\Pages;
-use IracodeCom\FilamentOrganizationalShield\Models\User;
+use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;

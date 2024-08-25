@@ -1,0 +1,21 @@
+<?php
+
+namespace Database\Seeders;
+
+use IracodeCom\FilamentOrganizationalShield\Models\Organization;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
+class OrganizationSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        Organization::query()->create([
+            'name' => 'نام سازمان',
+            'slug' => str('organization-name')->slug()->append(Str::random(5))->value(),
+        ]);
+    }
+}

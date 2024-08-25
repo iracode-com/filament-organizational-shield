@@ -42,7 +42,7 @@ class StructureWidget extends BaseWidget implements HasDescription, HasActions
     protected function getFormSchema(): array
     {
         return [
-            TextInput::make('name')->required(),
+            TextInput::make('title')->required(),
         ];
     }
 
