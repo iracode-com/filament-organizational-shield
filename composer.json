@@ -2,7 +2,7 @@
   "name": "iracode-com/filament-organizational-shield",
   "description": "Filament organizational shield for filament shield package",
   "type": "filament-plugin",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "keywords": [
     "laravel",
     "filament",
